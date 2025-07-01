@@ -6,6 +6,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
