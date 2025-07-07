@@ -2,13 +2,12 @@ package guru.springframework.spring5_recipe_app.controllers;
 
 import guru.springframework.spring5_recipe_app.domain.Recipe;
 import guru.springframework.spring5_recipe_app.services.RecipeServiceImpl;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
@@ -31,8 +30,8 @@ class IndexControllerTest {
 
     IndexController indexController;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         indexController = new IndexController(recipeService);
