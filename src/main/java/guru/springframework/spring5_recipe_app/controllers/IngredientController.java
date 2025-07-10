@@ -1,6 +1,8 @@
 package guru.springframework.spring5_recipe_app.controllers;
 
 import guru.springframework.spring5_recipe_app.commands.IngredientCommand;
+import guru.springframework.spring5_recipe_app.commands.RecipeCommand;
+import guru.springframework.spring5_recipe_app.commands.UnitOfMeasureCommand;
 import guru.springframework.spring5_recipe_app.services.IngredientService;
 import guru.springframework.spring5_recipe_app.services.RecipeService;
 import guru.springframework.spring5_recipe_app.services.UnitOfMeasureService;
@@ -36,7 +38,7 @@ public class IngredientController {
     }
 
     @GetMapping
-    @RequestMapping("recipe/{recipeId}/ingredient/{id}/show")
+    @RequestMapping("/recipe/{recipeId}/ingredient/{id}/show")
     public String showRecipeIngredient(@PathVariable String recipeId,
                                        @PathVariable String id, Model model) {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
@@ -45,7 +47,27 @@ public class IngredientController {
     }
 
     @GetMapping
-    @RequestMapping("recipe/{recipeId}/ingredient/{id}/update")
+    @RequestMapping("/recipe/{recipeId}/ingredient/new")
+    public String newRecipe(@PathVariable String recipeId, Model model) {
+        // Make sure we have a good id value
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+        // TODO: raise exception if null
+
+        // Need to return back parent id for hidden form property
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+
+        // Init uom
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+
+        return "recipe/ingredient/ingredientform";
+    }
+
+    @GetMapping
+    @RequestMapping("/recipe/{recipeId}/ingredient/{id}/update")
     public String updateRecipeIngredient(@PathVariable String recipeId,
                                          @PathVariable String id, Model model) {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
@@ -55,7 +77,7 @@ public class IngredientController {
     }
 
     @PostMapping
-    @RequestMapping("recipe/{recipeId}/ingredient")
+    @RequestMapping("/recipe/{recipeId}/ingredient")
     public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
 

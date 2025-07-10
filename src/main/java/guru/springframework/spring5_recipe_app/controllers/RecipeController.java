@@ -24,7 +24,7 @@ public class RecipeController {
         return "recipe/show";
     }
 
-    @RequestMapping("recipe/new")
+    @RequestMapping("/recipe/new")
     public String newRecipe(Model model) {
         model.addAttribute("recipe", new RecipeCommand());
 
@@ -39,7 +39,7 @@ public class RecipeController {
     }
 
     @PostMapping
-    @RequestMapping("recipe")
+    @RequestMapping("/recipe")
     public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 
