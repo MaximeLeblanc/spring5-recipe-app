@@ -1,15 +1,15 @@
 package guru.springframework.spring5_recipe_app.controllers;
 
 import guru.springframework.spring5_recipe_app.commands.RecipeCommand;
-import guru.springframework.spring5_recipe_app.exceptions.NotFoundException;
 import guru.springframework.spring5_recipe_app.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
@@ -47,7 +47,9 @@ public class RecipeController {
     @PostMapping("recipe")
     public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+            bindingResult.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
 
             return RECIPE_RECIPEFORM_URL;
         }
