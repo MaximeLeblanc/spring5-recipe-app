@@ -2,14 +2,19 @@ package guru.springframework.spring5_recipe_app.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
+@Document
 public class Recipe {
 
+    @Id
     private String id;
 
     private String description;
@@ -32,6 +37,7 @@ public class Recipe {
 
     private Notes notes;
 
+    @DBRef
     private Set<Category> categories = new HashSet<>();
 
     private Set<Ingredient> ingredients = new HashSet<>();
@@ -40,13 +46,11 @@ public class Recipe {
     public void setNotes(Notes notes) {
         if (notes != null) {
             this.notes = notes;
-            notes.setRecipe(this);
         }
     }
 
     public Recipe addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
-        ingredient.setRecipe(this);
 
         return this;
     }

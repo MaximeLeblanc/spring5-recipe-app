@@ -122,7 +122,6 @@ public class IngredientServiceImpl implements IngredientService {
             if (ingredientOptional.isPresent()) {
                 Ingredient ingredient = ingredientOptional.get();
                 log.debug("Ingredient found!");
-                ingredient.setRecipe(null);
                 recipe.getIngredients().remove(ingredient);
                 recipeRepository.save(recipe);
             }

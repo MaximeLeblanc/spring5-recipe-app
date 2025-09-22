@@ -2,7 +2,6 @@ package guru.springframework.spring5_recipe_app.converters;
 
 import guru.springframework.spring5_recipe_app.commands.IngredientCommand;
 import guru.springframework.spring5_recipe_app.domain.Ingredient;
-import guru.springframework.spring5_recipe_app.domain.Recipe;
 import guru.springframework.spring5_recipe_app.domain.UnitOfMeasure;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IngredientToIngredientCommandTest {
 
-    public static final Recipe RECIPE = new Recipe();
     public static final BigDecimal AMOUNT = new BigDecimal("1");
     public static final String DESCRIPTION = "Cheeseburger";
     public static final String UOM_ID = "2";
@@ -42,7 +40,6 @@ class IngredientToIngredientCommandTest {
         //given
         Ingredient ingredient = new Ingredient();
         ingredient.setId(ID_VALUE);
-        ingredient.setRecipe(RECIPE);
         ingredient.setAmount(AMOUNT);
         ingredient.setDescription(DESCRIPTION);
         ingredient.setUom(null);
@@ -61,7 +58,6 @@ class IngredientToIngredientCommandTest {
         //given
         Ingredient ingredient = new Ingredient();
         ingredient.setId(ID_VALUE);
-        ingredient.setRecipe(RECIPE);
         ingredient.setAmount(AMOUNT);
         ingredient.setDescription(DESCRIPTION);
 
