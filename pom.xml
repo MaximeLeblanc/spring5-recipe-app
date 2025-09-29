@@ -127,13 +127,13 @@
                         <format>html</format>
                         <format>xml</format>
                     </format>
-                    <check/>
+                    <check />
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.5.10.201208310627</version>
+                <version>0.8.13</version>
                 <configuration>
                     <skip>${maven.test.skip}</skip>
                     <output>file</output>
@@ -155,6 +155,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 </project>
