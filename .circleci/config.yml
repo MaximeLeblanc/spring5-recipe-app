@@ -50,10 +50,10 @@ jobs:
           when:
             always
 
-      - store-test-results:
+      - store_test_results:
           path: ~/junit/
 
-      - store-artifacts:
+      - store_artifacts:
           path: ~/junit/
 
       - run:
