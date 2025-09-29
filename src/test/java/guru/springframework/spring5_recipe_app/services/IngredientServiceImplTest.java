@@ -114,6 +114,7 @@ class IngredientServiceImplTest {
 //        Optional<Recipe> recipeOptional = Optional.of(recipe);
 
         when(recipeReactiveRepository.findById(anyString())).thenReturn(Mono.just(recipe));
+        when(recipeReactiveRepository.save(any())).thenReturn(Mono.just(recipe));
 
         // When
         ingredientService.deleteById("1", "3");

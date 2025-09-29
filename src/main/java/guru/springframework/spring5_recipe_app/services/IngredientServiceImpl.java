@@ -66,7 +66,10 @@ public class IngredientServiceImpl implements IngredientService {
     public Mono<IngredientCommand> saveIngredientCommand(IngredientCommand command) {
         Recipe recipe = recipeReactiveRepository.findById(command.getRecipeId()).block();
 
-        if (recipe != null) {
+        if (recipe == null) {
+            log.error("Recipe not found for id: {}", command.getRecipeId());
+            return Mono.just(new IngredientCommand());
+        } else {
             Optional<Ingredient> ingredientOptional = recipe
                     .getIngredients()
                     .stream()
@@ -104,7 +107,6 @@ public class IngredientServiceImpl implements IngredientService {
             // TODO: check for fail
             return Mono.just(ingredientToIngredientCommand.convert(savedIngredientOptional.get()));
         }
-        return Mono.just(new IngredientCommand());
 
 //        Optional<Recipe> recipeOptional = recipeRepository.findById(command.getRecipeId());
 //
