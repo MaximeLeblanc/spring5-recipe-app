@@ -4,12 +4,15 @@ import guru.springframework.spring5_recipe_app.domain.UnitOfMeasure;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DataMongoTest
 class UnitOfMeasureReactiveRepositoryTest {
 
     public static final String EACH = "Each";
+
     @Autowired
     UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
     

@@ -108,7 +108,7 @@ public class RecipeControllerTest {
                         .param("cookTime", "3000")
 
                 )
-                .andExpect(status().isOk())
+                .andExpect(status().is3xxRedirection())
                 .andExpect(model().attributeExists("recipe"))
                 .andExpect(view().name("recipe/recipeform"));
     }
